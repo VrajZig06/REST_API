@@ -12,9 +12,13 @@ from rest_framework.urlpatterns import format_suffix_patterns
 # ]
 
 # Class Based View
+
 urlpatterns = [
-    path('platforms/',views.StreamPlatformList.as_view()),
-    path('platforms/<int:pk>/',views.StreamPlatformDetails.as_view())
+    path('movies/',views.list_movies,name="movie-list"),
+    path('movie/<int:pk>/',views.movie),
+    path('platforms/',views.StreamPlatformList.as_view(),name='platform-list'),
+    path('platforms/<int:pk>/',views.StreamPlatformDetails.as_view()),
+    path('',views.api_root)
 ]
 
 

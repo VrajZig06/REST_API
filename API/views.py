@@ -10,8 +10,18 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework import mixins
 from rest_framework import generics
+from rest_framework.reverse import reverse
 
 # Create your views here.
+
+@api_view(['GET'])
+def api_root(request):
+    return Response({
+        "movielist": reverse('movie-list', request=request, format=None),
+        "platformlist": reverse('platform-list', request=request, format=None)
+    })
+
+
 @api_view(['GET','POST'])
 def list_movies(requset,format = None):
    if requset.method == 'GET':
