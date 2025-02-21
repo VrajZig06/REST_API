@@ -37,33 +37,40 @@ def movie(request,pk,format = None):
 
 
 
-class StreamPlatformList(mixins.ListModelMixin,
-                  mixins.CreateModelMixin,
-                  generics.GenericAPIView):
+
+# --------------------------------------------------------------------------------
+class StreamPlatformList(generics.ListCreateAPIView):
+    queryset = StreamPlatform.objects.all()
+    serializer_class = StreamPlatformSerializer
+# --------------------------------------------------------------------------------
+class StreamPlatformDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = StreamPlatform.objects.all()
     serializer_class = StreamPlatformSerializer
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+# --------------------------------------------------------------------------------
+# class StreamPlatformList(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIView):
+#     queryset = StreamPlatform.objects.all()
+#     serializer_class = StreamPlatformSerializer
 
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
 
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
+# --------------------------------------------------------------------------------
+# class StreamPlatformDetails(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.GenericAPIView):
+#     queryset = StreamPlatform.objects.all()
+#     serializer_class = StreamPlatformSerializer
 
-class StreamPlatformDetails(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.GenericAPIView):
-    queryset = StreamPlatform.objects.all()
-    serializer_class = StreamPlatformSerializer
+#     def get(self, request, *args, **kwargs):
+#         return self.retrieve(request, *args, **kwargs)
 
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
+#     def put(self, request, *args, **kwargs):
+#         return self.update(request, *args, **kwargs)
 
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+#     def delete(self, request, *args, **kwargs):
+#         return self.destroy(request, *args, **kwargs)
     
-
 # --------------------------------------------------------------------------------
 # class StreamPlatformList(APIView):
 #    def get(self,request,format = None):
